@@ -6,6 +6,8 @@ import Addproducts from './components/Addproducts';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import NotFound from './components/NotFound';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
