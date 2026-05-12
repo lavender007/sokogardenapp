@@ -1,34 +1,82 @@
-import logo from './logo.svg';
-import './App.css';
-import{BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-import Getproducts from './components/Getproducts'
-import Addproducts from './components/Addproducts';
-import Signup from './components/Signup';
-import Signin from './components/Signin';
-import NotFound from './components/NotFound';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import AppLayout from './components/AppLayout';
 
+import LandingPage from './pages/Landing';
+import { LoginPage, RegisterPage } from './pages/Auth';
+import CustomerHome from './pages/CustomerHome';
+import TherapistDashboard from './pages/TherapistDashboard';
+import ChatPage from './pages/Chat';
+import ProfilePage from './pages/Profile';
+import TherapistInfoPage from './pages/TherapistInfo';
 
+import './index.css';
 
-function App() {
+const getStoredUser = () => {
+  try {
+    return JSON.parse(localStorage.getItem('user'));
+  } catch {
+    return null;
+  }
+};
+
+function ProtectedRoute({ children, allowedRole }) {
+  const user = getStoredUser();
+  if (!user) return <Navigate to="/login" replace />;
+  if (allowedRole && user.role !== allowedRole) {
+    return <Navigate to={user.role === 'therapist' ? '/therapist' : '/home'} replace />;
+  }
+  return <AppLayout>{children}</AppLayout>;
+}
+
+function PublicRoute({ children }) {
+  const user = getStoredUser();
+  if (user) return <Navigate to={user.role === 'therapist' ? '/therapist' : '/home'} replace />;
+  return children;
+}
+
+function AppRoutes() {
   return (
-   <Router>
-     <div className="App">
-      <header className="App-header">
-      <h1>Welcome to Sokogarden</h1>
-      </header>
-      {/*Below are our different routes binding the components together with the rendered cmponents*/}
-      <Routes>
-        <Route path = '/'element={<Getproducts />}/>
-        <Route path = '/addproducts' element={<Addproducts />}/>
-        <Route path = '/signup' element={<Signup />}/>
-        <Route path = '/signin' element = {<Signin />}/>
-        <Route path = '/*' element = {<NotFound />} />
-        
-      </Routes>
-    </div>
-   </Router>
+    <Routes>
+      {/* Public */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+      <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+
+      {/* Customer routes */}
+      <Route path="/home" element={
+        <ProtectedRoute allowedRole="customer"><CustomerHome /></ProtectedRoute>
+      } />
+      <Route path="/therapist-info" element={
+        <ProtectedRoute allowedRole="customer"><TherapistInfoPage /></ProtectedRoute>
+      } />
+
+      {/* Therapist routes */}
+      <Route path="/therapist" element={
+        <ProtectedRoute allowedRole="therapist"><TherapistDashboard /></ProtectedRoute>
+      } />
+
+      {/* Shared */}
+      <Route path="/chat" element={
+        <ProtectedRoute><ChatPage /></ProtectedRoute>
+      } />
+      <Route path="/chat/:userId" element={
+        <ProtectedRoute><ChatPage /></ProtectedRoute>
+      } />
+      <Route path="/profile" element={
+        <ProtectedRoute><ProfilePage /></ProtectedRoute>
+      } />
+
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
+}

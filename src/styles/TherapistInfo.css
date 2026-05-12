@@ -1,0 +1,103 @@
+.therapist-info-page {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.therapist-info-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  text-align: center;
+  color: var(--stone-400);
+  gap: 12px;
+  font-size: 40px;
+}
+
+.therapist-info-empty h3 { font-size: 18px; color: var(--stone-600); }
+.therapist-info-empty p { font-size: 14px; }
+
+.ti-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 0;
+}
+
+.ti-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-300), var(--green-600));
+  color: white;
+  font-size: 32px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 20px rgba(22, 163, 74, 0.25);
+}
+
+.ti-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--stone-800);
+  margin-bottom: 8px;
+}
+
+.ti-tag {
+  font-size: 14px;
+  color: var(--green-600);
+  background: var(--green-50);
+  padding: 4px 14px;
+  border-radius: 99px;
+  margin-bottom: 6px;
+}
+
+.ti-rating { font-size: 13px; color: var(--stone-400); }
+
+.ti-bio-card, .ti-specialties-card, .ti-approach-card { padding: 20px 24px; }
+
+.ti-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone-400);
+  margin-bottom: 12px;
+}
+
+.ti-bio {
+  font-size: 15px;
+  color: var(--stone-600);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.ti-specialties { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.approach-items { display: flex; flex-direction: column; gap: 10px; }
+
+.approach-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--stone-600);
+}
+
+.approach-check { font-size: 16px; }
+
+.ti-chat-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 14px;
+  font-size: 15px;
+  border-radius: var(--radius-md);
+}

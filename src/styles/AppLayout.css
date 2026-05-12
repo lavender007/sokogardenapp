@@ -1,0 +1,78 @@
+.app-shell {
+  min-height: 100vh;
+  background: var(--sage-50);
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: white;
+  border-bottom: 1px solid var(--sage-100);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-bar-logo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--green-700);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-bar-greeting {
+  font-size: 14px;
+  color: var(--stone-500);
+}
+
+.top-bar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  border: 2px solid var(--green-200);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-bar-avatar:hover {
+  background: var(--green-200);
+  transform: scale(1.05);
+}
+
+.app-main {
+  flex: 1;
+  padding-bottom: 90px;
+  max-width: 768px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 768px) {
+  .app-main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
